@@ -83,20 +83,6 @@ function makeFolder(parent_id,values,row,column){
   }
 }
 
-function makeFolderOld(parent_id,values,row,column){
-  var new_folder_id
-  // If the folder named "values[row][column]" hasn't been created then create it
-  if (row>0 && values[row][column] == values[row-1][column]) {
-    new_folder_id = DriveApp.getFoldersByName(values[row][column]).next().getId()
-  } else {
-    new_folder_id = DriveApp.getFolderById(parent_id).createFolder(values[row][column]).getId()
-  }
-  // If values[row][column+1] is defined call makeFolder(new_folder_id,values,row,column+1)
-  if (values[row][column+1]) {
-    makeFolder(new_folder_id,values,row,column+1)
-  }
-}
-
 function onOpen() {
   var ui = SpreadsheetApp.getUi();
   ui.createMenu('Google Drive')
